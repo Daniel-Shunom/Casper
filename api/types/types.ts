@@ -37,16 +37,49 @@ export type NewUser = {
   userpronouns: Pronouns
 }
 
+export type UserSignin = {
+  username: string,
+  password: string
+}
+
+export type UserSession = {
+  userid: string
+}
+
+export type UserAuth  = {
+  userid: string,
+  authnticated: boolean
+}
+
+export type UserProfile = {
+  userid: string,
+  name: string,
+  username: string,
+  gender: Gender,
+  pronouns: Pronouns,
+  authenticated: boolean
+}
+
 // ==========ROOMS========== //
 
 type Capacity = 'small' 
   | 'medium' 
   | 'large'
 
-export type Room = { 
+export type NewRoom = { 
   ownerid: String,
   roomname: string,
   roomcapacity: Capacity,
+}
+
+export type DeleteRoom = {
+  userid: string,
+  roomid: string
+}
+
+export type NewRoomResponse = {
+  roomname: string,
+  roomid: string
 }
 
 // ==========LOGIN========== //
