@@ -70,10 +70,6 @@ export const deleteRoom = async (deleteroom: Schema.DeleteRoom) => (
   await api.delete('/rooms/delete', { data: deleteroom })
 )
 
-export const JoinRoom = async (roomid: string, userid: string) => (
-  await api.get(`/rooms/joinroom/${roomid}/${userid}`)
-)
-
 export function joinRoom(
   roomid: string,
   userid: string,
