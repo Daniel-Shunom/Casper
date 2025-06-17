@@ -67,7 +67,7 @@ export const deleteRoom = async (deleteroom: Schema.DeleteRoom) =>
 export const joinRoom = (
   roomid: string,
   userid: string,
-  onmessage: (data: any) => void
+  onmessage: (data: unknown) => void
 ): WebSocket => {
   const http_url = process.env.EXPO_BASE_URL!.replace(/\/$/, "");
   const ws_url =
