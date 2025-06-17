@@ -53,7 +53,7 @@ const Message: React.FC<Message> = ({
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <View style={styles.messageWrapper}>
         <View
           style={[styles.avatar, { backgroundColor: getAvatarColor(userid) }]}
@@ -68,15 +68,15 @@ const Message: React.FC<Message> = ({
           <Text style={styles.messageText}>{content}</Text>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 16,
-    paddingVertical: 2,
-    backgroundColor: "transparent",
+    // paddingHorizontal: 16,
+    // paddingVertical: 2,
+    //backgroundColor: "#fff",
   },
   messageWrapper: {
     flexDirection: "row",
