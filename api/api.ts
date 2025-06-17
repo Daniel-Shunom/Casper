@@ -51,9 +51,8 @@ export const createNewUser = async (user: Schema.NewUser) =>
 export const createFetchProfile = async (credential: Schema.UserSession) =>
   await api.post<Schema.UserProfile>("/user/profile", credential);
 
-export const createSignin = async (credentials: Schema.UserSignin) => {
+export const createSignin = async (credentials: Schema.UserSignin) =>
   await api.post<Schema.UserAuth>("/auth/signin", credentials);
-};
 
 export const createSignout = async (credential: Schema.UserSession) =>
   await api.post("/auth/signout", credential);
