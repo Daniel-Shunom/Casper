@@ -5,17 +5,17 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  View
+  View,
 } from "react-native";
 
 const TextBox: React.FC = () => {
   const [inputHeight, setInputHeight] = useState(44); // Default height
-  
+
   const quickActions = [
-    { id: 1, label: 'GIF', icon: require('@/assets/icons/send.png') },
-    { id: 2, label: 'Sticker', icon: require('@/assets/icons/send.png') },
-    { id: 3, label: 'Emoji', icon: require('@/assets/icons/send.png') },
-    { id: 4, label: 'File', icon: require('@/assets/icons/send.png') },
+    { id: 1, label: "GIF", icon: require("@/assets/icons/send.png") },
+    { id: 2, label: "Sticker", icon: require("@/assets/icons/send.png") },
+    { id: 3, label: "Emoji", icon: require("@/assets/icons/send.png") },
+    { id: 4, label: "File", icon: require("@/assets/icons/send.png") },
   ];
 
   return (
@@ -24,16 +24,16 @@ const TextBox: React.FC = () => {
         {/* Quick Action Buttons */}
         <View style={styles.buttonList}>
           {quickActions.map((item) => (
-            <Pressable 
+            <Pressable
               key={item.id}
               style={({ pressed }) => [
                 styles.button,
-                pressed && styles.buttonPressed
+                pressed && styles.buttonPressed,
               ]}
-              android_ripple={{ color: '#5865f2', borderless: true }}
+              android_ripple={{ color: "#5865f2", borderless: true }}
             >
-              <Image 
-                source={item.icon} 
+              <Image
+                source={item.icon}
                 style={styles.buttonIcon}
                 resizeMode="contain"
               />
@@ -45,7 +45,7 @@ const TextBox: React.FC = () => {
         {/* Message Input Container */}
         <View style={styles.inputContainer}>
           <TextInput
-            placeholder="Message #general"
+            placeholder="type a message..."
             placeholderTextColor="#72767d"
             style={[styles.textInput, { height: Math.max(44, inputHeight) }]}
             scrollEnabled={inputHeight >= 120}
@@ -66,19 +66,19 @@ const TextBox: React.FC = () => {
               setInputHeight(Math.min(Math.max(height, 44), 120));
             }}
             // Remove focus outline/border
-            underlineColorAndroid="transparent"
+            // underlineColorAndroid="transparent"
             blurOnSubmit={false}
           />
-          
+
           {/* Send Button */}
-          <Pressable 
+          <Pressable
             style={({ pressed }) => [
               styles.sendButton,
-              pressed && styles.sendButtonPressed
+              pressed && styles.sendButtonPressed,
             ]}
           >
-            <Image 
-              source={require('@/assets/icons/send.png')} 
+            <Image
+              source={require("@/assets/icons/send.png")}
               style={styles.sendIcon}
               resizeMode="contain"
             />
@@ -92,22 +92,20 @@ const TextBox: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#36393f",
-    paddingVertical: 12,
+    paddingTop: 12,
     paddingHorizontal: 16,
     borderTopWidth: 1,
     borderTopColor: "#202225",
   },
-  content: {
-    gap: 12,
-  },
+  content: { gap: 12 },
   buttonList: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: 8,
     paddingHorizontal: 4,
   },
   button: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: "#40444b",
     paddingHorizontal: 12,
     paddingVertical: 8,
@@ -129,16 +127,16 @@ const styles = StyleSheet.create({
   buttonIcon: {
     width: 16,
     height: 16,
-    tintColor: '#dcddde', // This will color your icons to match Discord's theme
+    tintColor: "#dcddde",
   },
   buttonText: {
     fontSize: 13,
-    color: '#dcddde',
-    fontWeight: '500',
+    color: "#dcddde",
+    fontWeight: "500",
   },
   inputContainer: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
+    flexDirection: "row",
+    alignItems: "flex-end",
     backgroundColor: "#40444b",
     borderRadius: 24,
     paddingHorizontal: 16,
@@ -156,16 +154,12 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     color: "#dcddde",
-    outline: 'none',
+    outline: "none",
     fontSize: 16,
     lineHeight: 22,
     paddingVertical: 12,
-    paddingHorizontal: 0,
     minHeight: 44,
-    textAlignVertical: 'top', // Align text to top for multiline
-    // Remove all borders and outlines
-    borderWidth: 0,
-    outlineWidth: 0,
+    textAlignVertical: "top",
   },
   sendButton: {
     width: 32,
@@ -191,7 +185,7 @@ const styles = StyleSheet.create({
   sendIcon: {
     width: 18,
     height: 18,
-    tintColor: '#ffffff',
+    tintColor: "#ffffff",
   },
 });
 
