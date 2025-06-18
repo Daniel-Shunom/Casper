@@ -24,12 +24,12 @@ type Gender =
 
 type Pronouns = `${string}/${string}`;
 
-type UserName = `@${string}`;
-
 type Name = {
   first: string;
   last: string;
 };
+
+export type UserName = `@${string}`;
 
 export type NewUser = {
   name: Name;
@@ -76,6 +76,13 @@ export type NewRoom = {
   roomname: string;
   roomcapacity: Capacity;
 };
+
+export type RoomInfo = {
+  roomname: string,
+  roomdesc: string,
+  roomowner: UserName,
+  roomcapacity: number
+}
 
 export type DeleteRoom = {
   userid: string;
