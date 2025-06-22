@@ -1,12 +1,19 @@
 import * as React from "react";
-import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg";
-import type { SvgProps } from "react-native-svg";
+import Svg, {
+  Defs,
+  Image,
+  Path,
+  Pattern,
+  SvgProps,
+  Use,
+} from "react-native-svg";
 const SvgCasperMadAtTheWind = (props: SvgProps) => (
   <Svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    width={250}
-    height={234}
+    // xmlns="http://www.w3.org/2000/svg"
+    // xmlnsXlink="http://www.w3.org/1999/xlink"
+    width={24}
+    height={24}
+    viewBox="0 0 198 172"
     fill="none"
     {...props}
   >
