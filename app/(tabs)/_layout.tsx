@@ -15,13 +15,19 @@ export default () => {
         headerShown: false,
         animation: "shift",
         tabBarPosition: "bottom",
-        tabBarShowLabel: false,
+        tabBarShowLabel: true, 
         tabBarActiveTintColor: "#007AFF", // iOS blue or your brand color
         tabBarInactiveTintColor: "#8E8E93", // iOS gray
+        tabBarLabelStyle: {
+          fontSize: 10,
+          fontWeight: "500",
+          marginTop: 6, 
+          marginBottom: 0,
+        },
         tabBarStyle: {
-          height: Platform.OS === "ios" ? 90 : 70,
-          paddingBottom: Platform.OS === "ios" ? 25 : 10,
-          paddingTop: 10,
+          height: Platform.OS === "ios" ? 100 : 80, 
+          paddingBottom: Platform.OS === "ios" ? 25 : 15, 
+          paddingTop: 8,
           shadowColor: "#000",
           shadowOffset: {
             width: 0,
@@ -32,21 +38,21 @@ export default () => {
           elevation: 10,
         },
         tabBarItemStyle: {
-          paddingVertical: 5,
+          paddingVertical: 2, 
+          justifyContent: "center",
+          alignItems: "center",
         },
       }}
     >
       <Tabs.Screen
         name="home"
         options={{
-          tabBarIcon: ({ color, focused }) => (
+          title: "Home", 
+          tabBarIcon: ({ color }) => (
             <CasperHome
               color={color}
-              width={focused ? ICON_SIZE + 2 : ICON_SIZE}
-              height={focused ? ICON_SIZE + 2 : ICON_SIZE}
-              style={{
-                transform: [{ scale: focused ? 1.1 : 1 }],
-              }}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           ),
         }}
@@ -54,14 +60,12 @@ export default () => {
       <Tabs.Screen
         name="explore/index"
         options={{
-          tabBarIcon: ({ color, focused }) => (
+          title: "Explore", 
+          tabBarIcon: ({ color }) => (
             <CasperExplore
               color={color}
-              width={focused ? ICON_SIZE + 2 : ICON_SIZE}
-              height={focused ? ICON_SIZE + 2 : ICON_SIZE}
-              style={{
-                transform: [{ scale: focused ? 1.1 : 1 }],
-              }}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           ),
         }}
@@ -69,14 +73,12 @@ export default () => {
       <Tabs.Screen
         name="settings/index"
         options={{
-          tabBarIcon: ({ color, focused }) => (
+          title: "Settings", 
+          tabBarIcon: ({ color }) => (
             <CasperSettings
               color={color}
-              width={focused ? ICON_SIZE + 2 : ICON_SIZE}
-              height={focused ? ICON_SIZE + 2 : ICON_SIZE}
-              style={{
-                transform: [{ scale: focused ? 1.1 : 1 }],
-              }}
+              width={ICON_SIZE}
+              height={ICON_SIZE}
             />
           ),
         }}
