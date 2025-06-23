@@ -13,7 +13,7 @@ const SvgCasperSend = (props: SvgProps) => (
     // xmlnsXlink="http://www.w3.org/1999/xlink"
     width={24}
     height={24}
-    viewBox="0 0 198 172"
+    viewBox="0 0 198 198"
     fill="none"
     {...props}
   >
