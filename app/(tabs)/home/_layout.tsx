@@ -1,5 +1,9 @@
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Slot, useLocalSearchParams, useRouter, useSegments } from "expo-router";
+import {
+  Slot,
+  useLocalSearchParams,
+  useRouter
+} from "expo-router";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -25,13 +29,12 @@ const rooms = [
 
 export default () => {
   const router = useRouter();
-  const segments = useSegments();
   const params = useLocalSearchParams();
   const insets = useSafeAreaInsets();
- 
+
   // Get the currently active room from the route parameters
   const activeRoomId = params.rooms as string;
- 
+
   return (
     <View style={[styles.container, { paddingTop: insets.top + 20 }]}>
       {/* Vertical Icon Menu */}
@@ -63,9 +66,18 @@ export default () => {
           ))}
         </ScrollView>
       </View>
-     
+
       {/* Main Content Area */}
-      <View style={{ flex: 1, backgroundColor: "#23272a" }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: "#23272a",
+          shadowColor: "#23272a",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 10,
+        }}
+      >
         <Slot />
       </View>
     </View>
