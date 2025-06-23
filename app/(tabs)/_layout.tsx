@@ -48,6 +48,7 @@ export default () => {
         name="home"
         options={{
           title: "Home", 
+          tabBarBadge: '9',
           tabBarIcon: ({ color }) => (
             <CasperHome
               color={color}
