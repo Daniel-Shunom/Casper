@@ -17,7 +17,7 @@ type DOB = {
 };
 
 type Gender = 
-  |"cisgender" 
+  | "cisgender" 
   | "transgender" 
   | "nonbinary" 
   | "other";
@@ -40,6 +40,11 @@ export type NewUser = {
   usergender: Gender;
   userpronouns: Pronouns;
 };
+
+export type User = NewUser & {
+  userdesc: string,
+  joined: `${Month}, ${number}`
+}
 
 export type UserSignin = {
   username: string;
@@ -100,3 +105,19 @@ export type Auth = {
   username: string;
   password: string;
 };
+
+// ==========MISC========== //
+
+type Month = 
+  | 'January'
+  | 'February'
+  | 'March'
+  | 'April'
+  | 'May'
+  | 'June'
+  | 'July'
+  | 'August'
+  | 'September'
+  | 'October'
+  | 'November'
+  | 'December'
