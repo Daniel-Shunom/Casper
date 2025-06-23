@@ -1,3 +1,4 @@
+import { CasperSend } from "@/casper_icons/generated";
 import { useState } from "react";
 import {
   Image,
@@ -56,8 +57,6 @@ const TextBox: React.FC = () => {
             maxLength={2000}
             returnKeyType="send"
             contextMenuHidden={false}
-            // @ts-expect-error
-            enableFocusRing={false}
             autoCapitalize="sentences"
             textAlign="left"
             selectionColor="#5865f2"
@@ -65,9 +64,6 @@ const TextBox: React.FC = () => {
               const height = event.nativeEvent.contentSize.height;
               setInputHeight(Math.min(Math.max(height, 44), 120));
             }}
-            // Remove focus outline/border
-            // underlineColorAndroid="transparent"
-            blurOnSubmit={false}
           />
 
           {/* Send Button */}
@@ -77,11 +73,7 @@ const TextBox: React.FC = () => {
               pressed && styles.sendButtonPressed,
             ]}
           >
-            <Image
-              source={require("@/assets/icons/send.png")}
-              style={styles.sendIcon}
-              resizeMode="contain"
-            />
+            <CasperSend width={20} height={20}/>
           </Pressable>
         </View>
       </View>
@@ -95,7 +87,9 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingHorizontal: 16,
     borderTopWidth: 1,
-    borderTopColor: "#202225",
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24
+    // borderTopColor: "#202225",
   },
   content: { gap: 12 },
   buttonList: {
@@ -140,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#40444b",
     borderRadius: 24,
     paddingHorizontal: 16,
-    paddingVertical: 4,
+    marginBottom: 10,
     gap: 12,
     shadowColor: "#000",
     shadowOffset: {
