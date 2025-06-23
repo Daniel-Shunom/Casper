@@ -72,7 +72,7 @@ export default () => {
         }}
       />
       <Tabs.Screen
-        name="settings/index"
+        name="settings"
         options={{
           title: "Settings", 
           tabBarIcon: ({ color }) => (
