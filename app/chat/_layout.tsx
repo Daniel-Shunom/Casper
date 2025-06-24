@@ -12,7 +12,9 @@ export default function RoomDetailsLayout() {
     <KeyboardAvoidingView
       style={styles.container}
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 20}
+      // TODO -> the offset here is dependent on the padding distance in the bottm
+      //         fix this discrepancy asap
+      keyboardVerticalOffset={Platform.OS === "ios" ? 70 : 20}
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <Slot />
