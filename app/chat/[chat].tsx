@@ -20,11 +20,10 @@ export default function ChatIndex() {
         keyboardShouldPersistTaps="handled"
         style={styles.scrollView}
       >
-        {/* <Text style={styles.helloText}>Hello</Text> */}
-        {/* Add your chat messages here */}
       </ScrollView>
-      
-      <View style={[styles.textBoxContainer, { paddingBottom: insets.bottom }]}>
+      {/* TODO -> the offset here is dependent on the padding distance in the bottm
+              fix this discrepancy asap */}
+      <View style={[styles.textBoxContainer, { paddingBottom: insets.bottom - 10 }]}>
         <TextBox />
       </View>
     </View>
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   textBoxContainer: {
-    backgroundColor: "#2c2f33",
+    backgroundColor: "#36393f",
     borderTopEndRadius: 20,
     borderTopStartRadius: 20,
   },
