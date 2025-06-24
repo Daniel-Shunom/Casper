@@ -115,7 +115,7 @@ export default function RoomDetailsPage() {
   };
 
   const handleJoinSession = () => {
-    Alert.alert('Join Session', 'Joining the session...');
+    // We will wait for all the room data to load here.
     router.push('/chat/[chat]');
   };
 
