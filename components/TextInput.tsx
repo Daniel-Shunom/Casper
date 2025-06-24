@@ -48,22 +48,19 @@ const TextBox: React.FC = () => {
           <TextInput
             placeholder="type a message..."
             placeholderTextColor="#72767d"
-            style={[styles.textInput, { height: Math.max(44, inputHeight) }]}
-            scrollEnabled={inputHeight >= 120}
-            submitBehavior="submit"
-            onEndEditing={() => {}}
             multiline={true}
-            autoCorrect={true}
+            scrollEnabled={true}
+            style={[styles.textInput, { height: Math.max(44, inputHeight) }]}
+            onContentSizeChange={(e) => {
+              const h = e.nativeEvent.contentSize.height;
+              setInputHeight(Math.min(Math.max(h, 44), 120));
+            }}
             maxLength={2000}
             returnKeyType="send"
-            contextMenuHidden={false}
+            autoCorrect
             autoCapitalize="sentences"
             textAlign="left"
             selectionColor="#5865f2"
-            onContentSizeChange={(event) => {
-              const height = event.nativeEvent.contentSize.height;
-              setInputHeight(Math.min(Math.max(height, 44), 120));
-            }}
           />
 
           {/* Send Button */}
@@ -73,7 +70,7 @@ const TextBox: React.FC = () => {
               pressed && styles.sendButtonPressed,
             ]}
           >
-            <CasperSend width={20} height={20}/>
+            <CasperSend width={20} height={20} />
           </Pressable>
         </View>
       </View>
@@ -87,9 +84,11 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingHorizontal: 16,
     borderTopLeftRadius: 24,
-    borderTopRightRadius: 24
+    borderTopRightRadius: 24,
   },
-  content: { gap: 12 },
+  content: {
+    gap: 12,
+  },
   buttonList: {
     flexDirection: "row",
     gap: 8,
@@ -104,10 +103,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     gap: 6,
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
+    shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.2,
     shadowRadius: 2,
     elevation: 2,
@@ -135,10 +131,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     gap: 12,
     shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
@@ -146,13 +139,11 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     color: "#dcddde",
-    outline: "none",
     fontSize: 16,
     lineHeight: 22,
     paddingVertical: 12,
-    minHeight: 44,
     textAlignVertical: "top",
-    padding: 10
+    minHeight: 44,
   },
   sendButton: {
     width: 32,
@@ -163,10 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginBottom: 6,
     shadowColor: "#5865f2",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 4,
@@ -174,11 +162,6 @@ const styles = StyleSheet.create({
   sendButtonPressed: {
     backgroundColor: "#4752c4",
     transform: [{ scale: 0.9 }],
-  },
-  sendIcon: {
-    width: 18,
-    height: 18,
-    tintColor: "#ffffff",
   },
 });
 
