@@ -1,11 +1,10 @@
-import { RoomInfo, UserName } from "@/api/types/types"; // Adjust path as needed
-import MemberCard from "@/components/MemberCard"; // Add this import
-import RoomCard from "@/components/RoomCard"; // Adjust path as needed
-import { useLocalSearchParams } from "expo-router";
-import { useEffect, useState } from "react";
-import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { RoomInfo, UserName } from "@/api/types/types";
+import MemberCard from "@/components/MemberCard";
+import RoomCard from "@/components/RoomCard";
+import { router, useLocalSearchParams } from "expo-router";
+import { useEffect, useRef, useState } from "react";
+import { Alert, FlatList, PanResponder, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-// Mock data for testing
 const mockMembers = [
   { username: "@john_doe" as UserName, userdesc: { Some: "Software developer and coffee enthusiast" } },
   { username: "@alice_smith" as UserName, userdesc: { Some: "UI/UX designer with a passion for minimalism" } },
@@ -41,6 +40,18 @@ export default function RoomDetailsPage() {
   const [loading, setLoading] = useState<boolean>(true);
   const [showJoinSessionButton, setShowJoinSessionButton] = useState<boolean>(true);
 
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gesture) =>
+        Math.abs(gesture.dx) > 20 && Math.abs(gesture.dy) < 20,
+      onPanResponderRelease: (_, gesture) => {
+        if (gesture.dx < -50) {
+          handleJoinSession();
+        }
+      },
+    })
+  ).current;
+
   useEffect(() => {
     const loadRoomData = () => {
       try {
@@ -65,11 +76,6 @@ export default function RoomDetailsPage() {
 
   const fetchRoomById = async (roomId: string) => {
     try {
-      // Replace this with your actual API call
-      // const response = await api.getRoomById(roomId);
-      // setRoomData(response.data);
-      
-      // For now, using mock data
       setRoomData(getMockRoomData(roomId));
     } catch (error) {
       console.error('Error fetching room:', error);
@@ -86,15 +92,12 @@ export default function RoomDetailsPage() {
 
   const handleJoinRoom = () => {
     if (!roomData) return;
-    
     setIsJoined(true);
     Alert.alert('Success', `You joined ${roomData.roomname}!`);
-    
   };
 
   const handleLeaveRoom = () => {
     if (!roomData) return;
-    
     Alert.alert(
       'Leave Room',
       `Are you sure you want to leave ${roomData.roomname}?`,
@@ -105,8 +108,6 @@ export default function RoomDetailsPage() {
           style: 'destructive',
           onPress: () => {
             setIsJoined(false);
-            // Implement your leave room logic here
-            // api.leaveRoom(rooms as string);
           }
         }
       ]
@@ -115,7 +116,7 @@ export default function RoomDetailsPage() {
 
   const handleJoinSession = () => {
     Alert.alert('Join Session', 'Joining the session...');
-    // Implement your join session logic here
+    router.push('/chat/[chat]');
   };
 
   const renderMemberItem = ({ item }: { item: typeof mockMembers[0] }) => (
@@ -124,7 +125,7 @@ export default function RoomDetailsPage() {
 
   if (loading) {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} {...panResponder.panHandlers}>
         <View style={styles.loadingContainer}>
           <Text style={styles.loadingText}>Loading room...</Text>
         </View>
@@ -134,7 +135,7 @@ export default function RoomDetailsPage() {
 
   if (!roomData) {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} {...panResponder.panHandlers}>
         <View style={styles.errorContainer}>
           <Text style={styles.errorText}>Room not found</Text>
           <Text style={styles.errorSubtext}>
@@ -146,7 +147,7 @@ export default function RoomDetailsPage() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} {...panResponder.panHandlers}>
       {/* Fixed content at the top */}
       <View style={styles.fixedContent}>
         <View style={styles.header}>
@@ -179,7 +180,7 @@ export default function RoomDetailsPage() {
           <Text style={styles.infoText}>
             blah blah blah {roomData.roomdesc}
           </Text>
-          
+
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Owner:</Text>
             <Text style={styles.infoValue}>Daniel SJ {roomData.roomowner}</Text>
@@ -194,7 +195,7 @@ export default function RoomDetailsPage() {
             Members ({mockMembers.length}/{roomData.roomcapacity})
           </Text>
         </View>
-        
+
         <FlatList
           data={mockMembers}
           renderItem={renderMemberItem}
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
   },
   fixedContent: {
-    // This will take up only the space it needs
+    // temp
   },
   header: {
     padding: 20,
@@ -321,7 +322,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   membersSection: {
-    flex: 1, // This takes up the remaining space
+    flex: 1, 
     backgroundColor: '#36393f',
     margin: 16,
     marginTop: 8,
@@ -334,7 +335,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#40444b',
   },
   membersList: {
-    flex: 1, // This makes the FlatList fill the remaining space in membersSection
+    flex: 1, 
   },
   membersListContent: {
     paddingHorizontal: 8,
