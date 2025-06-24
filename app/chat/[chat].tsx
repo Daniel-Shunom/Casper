@@ -2,21 +2,31 @@ import TextBox from "@/components/TextInput";
 import React from "react";
 import {
   ScrollView,
+  StatusBar,
   StyleSheet,
   View
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ChatIndex() {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.inner}>
+    <View style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor="#2c2f33" translucent={false} />
+      
       <ScrollView
         contentContainerStyle={styles.main}
         keyboardShouldPersistTaps="handled"
+        style={styles.scrollView}
       >
         {/* <Text style={styles.helloText}>Hello</Text> */}
         {/* Add your chat messages here */}
       </ScrollView>
-      <TextBox />
+      
+      <View style={[styles.textBoxContainer, { paddingBottom: insets.bottom }]}>
+        <TextBox />
+      </View>
     </View>
   );
 }
@@ -24,16 +34,21 @@ export default function ChatIndex() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor: "#2c2f33", 
   },
-  inner: {
+  scrollView: {
     flex: 1,
-    justifyContent: "flex-end",
   },
   main: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: "flex-end",
     paddingHorizontal: 16,
     paddingTop: 16,
+  },
+  textBoxContainer: {
+    backgroundColor: "#2c2f33",
+    borderTopEndRadius: 20,
+    borderTopStartRadius: 20,
   },
   helloText: {
     color: "#ffffff",

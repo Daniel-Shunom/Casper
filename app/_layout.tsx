@@ -9,6 +9,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import "react-native-reanimated";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useColorScheme } from "@/hooks/useColorScheme";
 
@@ -28,17 +29,19 @@ export default function RootLayout() {
   }
 
   return (
-    <KeyboardProvider>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          </Stack>
-          <StatusBar style="auto" />
-        </ThemeProvider>
-      </QueryClientProvider>
-    </KeyboardProvider>
+    <SafeAreaProvider>
+      <KeyboardProvider>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            </Stack>
+            <StatusBar style="auto" />
+          </ThemeProvider>
+        </QueryClientProvider>
+      </KeyboardProvider>
+    </SafeAreaProvider>
   );
 }

@@ -52,7 +52,7 @@ export default () => {
               ]}
               onPress={() =>
                 router.push({
-                  pathname: "/(tabs)/home/(rooms)/[rooms]",
+                  pathname: "/(tabs)/home/[rooms]",
                   params: { rooms: room.id },
                 })
               }

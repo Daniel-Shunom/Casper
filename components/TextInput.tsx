@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     minHeight: 44,
     textAlignVertical: "top",
+    padding: 10
   },
   sendButton: {
     width: 32,

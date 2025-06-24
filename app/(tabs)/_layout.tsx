@@ -61,7 +61,7 @@ export default () => {
       <Tabs.Screen
         name="explore/index"
         options={{
-          href: null,
+          // href: null,
           title: "Explore", 
           tabBarIcon: ({ color }) => (
             <CasperExplore
