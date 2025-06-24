@@ -3,7 +3,7 @@ import MemberCard from "@/components/MemberCard"; // Add this import
 import RoomCard from "@/components/RoomCard"; // Adjust path as needed
 import { useLocalSearchParams } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
+import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 // Mock data for testing
 const mockMembers = [
@@ -39,6 +39,7 @@ export default function RoomDetailsPage() {
   const [roomData, setRoomData] = useState<RoomInfo | null>(null);
   const [isJoined, setIsJoined] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [showJoinSessionButton, setShowJoinSessionButton] = useState<boolean>(true);
 
   useEffect(() => {
     const loadRoomData = () => {
@@ -112,6 +113,11 @@ export default function RoomDetailsPage() {
     );
   };
 
+  const handleJoinSession = () => {
+    Alert.alert('Join Session', 'Joining the session...');
+    // Implement your join session logic here
+  };
+
   const renderMemberItem = ({ item }: { item: typeof mockMembers[0] }) => (
     <MemberCard info={item} />
   );
@@ -144,8 +150,20 @@ export default function RoomDetailsPage() {
       {/* Fixed content at the top */}
       <View style={styles.fixedContent}>
         <View style={styles.header}>
-          <Text style={styles.headerTitle}>Room Details</Text>
-          <Text style={styles.roomId}>ID: {rooms}</Text>
+          <View style={styles.headerContent}>
+            <View style={styles.headerText}>
+              <Text style={styles.headerTitle}>Room Details</Text>
+              <Text style={styles.roomId}>ID: {rooms}</Text>
+            </View>
+            {showJoinSessionButton && (
+              <TouchableOpacity
+                style={styles.joinSessionButton}
+                onPress={handleJoinSession}
+              >
+                <Text style={styles.joinSessionButtonText}>Join Session</Text>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
 
         <RoomCard
@@ -205,6 +223,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#40444b',
   },
+  headerContent: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+  },
+  headerText: {
+    flex: 1,
+  },
   headerTitle: {
     color: '#ffffff',
     fontSize: 24,
@@ -215,6 +241,19 @@ const styles = StyleSheet.create({
     color: '#b9bbbe',
     fontSize: 14,
     fontWeight: '500',
+  },
+  joinSessionButton: {
+    backgroundColor: '#5865f2',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 4,
+    marginLeft: 12,
+    marginTop: 2,
+  },
+  joinSessionButtonText: {
+    color: '#ffffff',
+    fontSize: 12,
+    fontWeight: '600',
   },
   loadingContainer: {
     flex: 1,

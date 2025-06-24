@@ -21,10 +21,10 @@ export default () => {
       <UnivItemMenu title="Rooms" subtitle="configure your rooms" modalType="half">
         <ProfileCard props={demo} />
       </UnivItemMenu>
-      <UnivItemMenu title="Rooms" subtitle="configure your rooms" modalType="half">
+      <UnivItemMenu title="Settings" subtitle="configure your rooms" modalType="half">
         <ProfileCard props={demo} />
       </UnivItemMenu>
-      <UnivItemMenu title="Rooms" subtitle="configure your rooms" modalType="half">
+      <UnivItemMenu title="Notifications" subtitle="configure your rooms" modalType="full">
         <ProfileCard props={demo} />
       </UnivItemMenu>
     </ScrollView>

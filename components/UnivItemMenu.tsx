@@ -158,8 +158,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: '#4f545c',
+    // borderBottomWidth: 1,
+    // borderBottomColor: '#4f545c',
   },
   modalHeaderLeft: {
     flexDirection: 'row',
@@ -190,8 +190,8 @@ const styles = StyleSheet.create({
   },
   modalFooter: {
     padding: 20,
-    borderTopWidth: 1,
-    borderTopColor: '#4f545c',
+    // borderTopWidth: 1,
+    // borderTopColor: '#4f545c',
   },
   doneButton: {
     backgroundColor: '#7289da',
