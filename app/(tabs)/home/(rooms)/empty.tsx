@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#fff",
     padding: 24,
+    borderTopLeftRadius: 20
   },
   image: {
     width: 120,
