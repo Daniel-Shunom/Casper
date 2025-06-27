@@ -99,6 +99,13 @@ export type NewRoomResponse = {
   roomid: string;
 };
 
+// ==========MESSAGE========== //
+export type Message = {
+  userid: string;
+  roomid: string;
+  content: string;
+  authenticated: boolean;
+}
 // ==========LOGIN========== //
 
 export type Auth = {

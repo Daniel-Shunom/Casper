@@ -66,7 +66,7 @@ export const deleteRoom = async (deleteroom: Schema.DeleteRoom) =>
 export const joinRoom = (
   roomid: string,
   userid: string,
-  onmessage: (data: unknown) => void
+  //onmessage: () => void
 ): WebSocket => {
   const http_url = process.env.EXPO_BASE_URL!.replace(/\/$/, "");
   const ws_url =
@@ -77,12 +77,8 @@ export const joinRoom = (
   socket.onopen = () => console.log("joined room");
   socket.onerror = (error) => console.error(error);
   socket.onclose = (evt) => console.log("left room", [evt.code, evt.reason]);
-  socket.onmessage = (message) => {
-    try {
-      onmessage(JSON.parse(message.data));
-    } catch (error) {
-      console.log(error);
-    }
+  socket.onmessage = (_message) => {
+    if (__DEV__) console.debug('recieved message') 
   };
 
   return socket;
