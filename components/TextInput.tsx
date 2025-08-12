@@ -51,6 +51,8 @@ const TextBox: React.FC = () => {
             multiline={true}
             scrollEnabled={true}
             style={[styles.textInput, { height: Math.max(44, inputHeight) }]}
+            dataDetectorTypes={'all'}
+            enablesReturnKeyAutomatically={true}
             onContentSizeChange={(e) => {
               const h = e.nativeEvent.contentSize.height;
               setInputHeight(Math.min(Math.max(h, 44), 120));
