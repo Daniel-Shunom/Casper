@@ -116,7 +116,7 @@ export default function RoomDetailsPage() {
 
   const handleJoinSession = () => {
     // We will wait for all the room data to load here.
-    router.push('/chat/[chat]');
+    router.push(`/chat/${"This is from the other page navigation with id: " + rooms}`);
   };
 
   const renderMemberItem = ({ item }: { item: typeof mockMembers[0] }) => (

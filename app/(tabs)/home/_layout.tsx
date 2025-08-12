@@ -50,12 +50,7 @@ export default () => {
                 styles.iconButton,
                 activeRoomId === room.id && styles.selected,
               ]}
-              onPress={() =>
-                router.push({
-                  pathname: "/(tabs)/home/[rooms]",
-                  params: { rooms: room.id },
-                })
-              }
+              onPress={() => router.push(`/(tabs)/home/${room.id}`)}
             >
               <FontAwesome
                 name={room.icon}

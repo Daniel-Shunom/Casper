@@ -1,28 +1,33 @@
+import HeaderNavigation from "@/components/HeaderNavigation";
 import TextBox from "@/components/TextInput";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import {
   ScrollView,
   StatusBar,
   StyleSheet,
-  View
+  SafeAreaView,
+  View,
+  Text
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ChatIndex() {
   const insets = useSafeAreaInsets();
-
+  const { chat } = useLocalSearchParams()
+  
   return (
     <View style={styles.container}>
+      <SafeAreaView />
+      <HeaderNavigation title="Hallo"/>
       <StatusBar barStyle="light-content" backgroundColor="#2c2f33" translucent={false} />
-      
+      <Text style={{backgroundColor: "#fff"}}>{chat}</Text>
       <ScrollView
         contentContainerStyle={styles.main}
         keyboardShouldPersistTaps="handled"
         style={styles.scrollView}
       >
       </ScrollView>
-      {/* TODO -> the offset here is dependent on the padding distance in the bottm
-              fix this discrepancy asap */}
       <View style={[styles.textBoxContainer, { paddingBottom: insets.bottom - 10 }]}>
         <TextBox />
       </View>
