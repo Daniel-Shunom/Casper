@@ -11,6 +11,8 @@ import {
   View,
   Text
 } from "react-native";
+
+import Animated from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ChatIndex() {
@@ -23,13 +25,7 @@ export default function ChatIndex() {
       <HeaderNavigation title="Hallo"/>
       <StatusBar barStyle="light-content" backgroundColor="#2c2f33" translucent={false} />
       <Text style={{backgroundColor: "#fff"}}>{chat}</Text>
-      <ScrollView
-        contentContainerStyle={styles.main}
-        keyboardShouldPersistTaps="handled"
-        style={styles.scrollView}
-      >
-        <MessagesLayout />
-      </ScrollView>
+      <MessagesLayout />
       <View style={[styles.textBoxContainer, { paddingBottom: insets.bottom - 10 }]}>
         <TextBox />
       </View>
