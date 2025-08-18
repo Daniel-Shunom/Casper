@@ -59,7 +59,7 @@ export default () => {
         }}
       />
       <Tabs.Screen
-        name="explore/index"
+        name="explore"
         options={{
           // href: null,
           title: "Explore", 
