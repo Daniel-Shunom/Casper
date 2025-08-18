@@ -1,4 +1,5 @@
 import { CasperSend } from "@/casper_icons/generated";
+import { useMessageStore } from "@/ctx/stores/messages/messageStore";
 import { useState } from "react";
 import {
   Image,
@@ -11,6 +12,9 @@ import {
 
 const TextBox: React.FC = () => {
   const [inputHeight, setInputHeight] = useState(44); // Default height
+  const [input, setInput] = useState<string>("")
+
+  const { enqueue_message } = useMessageStore()
 
   const quickActions = [
     { id: 1, label: "GIF", icon: require("@/assets/icons/send.png") },
@@ -18,6 +22,11 @@ const TextBox: React.FC = () => {
     { id: 3, label: "Emoji", icon: require("@/assets/icons/send.png") },
     { id: 4, label: "File", icon: require("@/assets/icons/send.png") },
   ];
+
+  const HandleSubmit = () => {
+    enqueue_message(input)
+    setInput("")
+  }
 
   return (
     <View style={styles.container}>
@@ -57,10 +66,12 @@ const TextBox: React.FC = () => {
               const h = e.nativeEvent.contentSize.height;
               setInputHeight(Math.min(Math.max(h, 44), 120));
             }}
+            value={input}
             maxLength={2000}
-            returnKeyType="send"
+            returnKeyType="default"
             autoCorrect
             autoCapitalize="sentences"
+            onChangeText={setInput}
             textAlign="left"
             selectionColor="#5865f2"
           />
@@ -71,6 +82,7 @@ const TextBox: React.FC = () => {
               styles.sendButton,
               pressed && styles.sendButtonPressed,
             ]}
+            onPress={HandleSubmit}
           >
             <CasperSend width={20} height={20} />
           </Pressable>
