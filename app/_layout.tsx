@@ -30,6 +30,7 @@ export default function RootLayout() {
   }
 
   return (
+    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
     <SafeAreaProvider>
       <SessionProvider>
         <KeyboardProvider>
@@ -47,5 +48,6 @@ export default function RootLayout() {
         </KeyboardProvider>
       </SessionProvider>
     </SafeAreaProvider>
+    </ThemeProvider>
   );
 }
