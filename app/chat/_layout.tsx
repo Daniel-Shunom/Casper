@@ -1,4 +1,7 @@
-import { Slot } from "expo-router";
+import { useSession } from "@/ctx/appctx/appctx";
+import { useMessageStore } from "@/ctx/stores/messages/messageStore";
+import { Slot, useLocalSearchParams } from "expo-router";
+import { useEffect } from "react";
 import {
   Keyboard,
   Platform,
@@ -8,6 +11,15 @@ import {
 import { KeyboardAvoidingView } from "react-native-keyboard-controller";
 
 export default function () {
+  const { chat } = useLocalSearchParams()
+  const { set_roomid, set_userid } = useMessageStore()
+  const { getUserid } = useSession()
+
+  useEffect(() => {
+    set_roomid(chat as string)
+    set_userid(getUserid())
+  }, [])
+
   return (
     <KeyboardAvoidingView
       style={styles.container}

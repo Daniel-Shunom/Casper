@@ -1,5 +1,6 @@
 import HeaderNavigation from "@/components/HeaderNavigation";
 import TextBox from "@/components/TextInput";
+import MessagesLayout from "@/components/ui/MessageLayout";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import {
@@ -27,6 +28,7 @@ export default function ChatIndex() {
         keyboardShouldPersistTaps="handled"
         style={styles.scrollView}
       >
+        <MessagesLayout />
       </ScrollView>
       <View style={[styles.textBoxContainer, { paddingBottom: insets.bottom - 10 }]}>
         <TextBox />
