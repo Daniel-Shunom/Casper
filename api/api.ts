@@ -74,11 +74,12 @@ export const joinRoom = (
 
   const socket = new WebSocket(ws_url);
 
-  socket.onopen = () => console.log("joined room");
-  socket.onerror = (error) => console.error(error);
+  socket.onopen = () => {if (__DEV__) console.log("joined room")};
+  socket.onerror = (error) => { if (__DEV__) console.error(error)}
   socket.onclose = (evt) => console.log("left room", [evt.code, evt.reason]);
   socket.onmessage = (_message) => {
     if (__DEV__) console.debug('recieved message') 
+    return _message
   };
 
   return socket;
