@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 
-interface Message {
+interface Message extends ViewProps {
   username: string;
   userid: string;
   content: string;
