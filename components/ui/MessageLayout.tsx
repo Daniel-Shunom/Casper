@@ -1,13 +1,40 @@
+import { Message as msg } from "@/api/types/types";
 import { useSession } from "@/ctx/appctx/appctx";
-import { useMessageStore } from "@/ctx/stores/messages/messageStore";
-import Message from "../MessageCard";
-import Animated, { LinearTransition } from "react-native-reanimated";
+import { useRoomSession } from "@/ctx/roomctx/roomctx";
+import { useCentralMessageStore } from "@/ctx/stores/messages/messageStore";
+import { useLocalSearchParams } from "expo-router";
 import { useEffect, useRef } from "react";
-import { FlatList, ScrollView } from "react-native-reanimated/lib/typescript/Animated";
+import Animated, { LinearTransition } from "react-native-reanimated";
+import { FlatList } from "react-native-reanimated/lib/typescript/Animated";
+import Message from "../MessageCard";
 
 export default function MessagesLayout(): React.JSX.Element {
-  const { message_queue } = useMessageStore()
   const { getUsername } = useSession()
+
+  const { chat } = useLocalSearchParams()
+
+  const { roomid } = useRoomSession()
+
+  const handler = useCentralMessageStore()
+    .getRoomHandler(roomid)
+
+  /// note to self ->
+  /// the following code is verbose for the sake of not
+  /// abusing the rule of hooks. We can add in beter types
+  /// down the line, but it is 11:44 pm, and I am tired :)
+
+  const storeInstance = handler && 'Some' in handler 
+    ? handler.Some 
+    : null 
+
+  const messageStore = storeInstance
+    ? storeInstance()
+    : null
+
+  const message_queue: msg[] = messageStore
+    ? messageStore.message_queue : [
+      { userid: "asdsd", roomid: chat as string, content: "foobar", authenticated: true}
+    ]
 
   const ref = useRef<FlatList<Message>>(null)
 
