@@ -1,5 +1,6 @@
 import { CasperSend } from "@/casper_icons/generated";
-import { useMessageStore } from "@/ctx/stores/messages/messageStore";
+import { useRoomSession } from "@/ctx/roomctx/roomctx";
+import { useCentralMessageStore } from "@/ctx/stores/messages/messageStore";
 import { useState } from "react";
 import {
   Image,
@@ -14,7 +15,23 @@ const TextBox: React.FC = () => {
   const [inputHeight, setInputHeight] = useState(44); // Default height
   const [input, setInput] = useState<string>("")
 
-  const { enqueue_message } = useMessageStore()
+  const { roomid } = useRoomSession()
+
+  /// note to self ->
+  /// the following code is verbose for the sake of not
+  /// abusing the rule of hooks. We can add in beter types
+  /// down the line, but it is 11:44 pm, and I am tired :)
+  
+  const handler = useCentralMessageStore()
+    .getRoomHandler(roomid)
+  
+  const storeInstance = handler && 'Some' in handler 
+    ? handler.Some 
+    : null 
+
+  const messageStore = storeInstance
+    ? storeInstance()
+    : null
 
   const quickActions = [
     { id: 1, label: "GIF", icon: require("@/assets/icons/send.png") },
@@ -24,7 +41,9 @@ const TextBox: React.FC = () => {
   ];
 
   const HandleSubmit = () => {
-    enqueue_message(input)
+    if (messageStore) {
+     messageStore.enqueue_message(input)
+    }
     setInput("")
   }
 
