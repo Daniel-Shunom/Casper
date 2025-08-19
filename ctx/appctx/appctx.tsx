@@ -54,6 +54,8 @@ export function SessionProvider({ children }: PropsWithChildren) {
 
       username: username,
       
+      userid: userid,
+
       getUsername: () => {
         return 'Some' in username
           ? username.Some
