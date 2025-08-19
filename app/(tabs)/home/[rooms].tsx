@@ -35,6 +35,7 @@ const mockMembers = [
 
 export default function RoomDetailsPage() {
   const { rooms } = useLocalSearchParams();
+
   const [roomData, setRoomData] = useState<RoomInfo | null>(null);
   const [isJoined, setIsJoined] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
@@ -116,7 +117,7 @@ export default function RoomDetailsPage() {
 
   const handleJoinSession = () => {
     // We will wait for all the room data to load here.
-    router.push(`/chat/${"This is from the other page navigation with id: " + rooms}`);
+    router.push(`/chat/${rooms}`);
   };
 
   const renderMemberItem = ({ item }: { item: typeof mockMembers[0] }) => (
