@@ -14,9 +14,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SessionProvider } from "@/ctx/appctx/appctx";
 
-// ===================QUERY HANDLERS====================//
 const queryClient = new QueryClient();
-// =====================================================//
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
