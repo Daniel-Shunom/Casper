@@ -1,9 +1,11 @@
+import { useCentralMessageStore } from "@/ctx/stores/messages/messageStore";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   Slot,
   useLocalSearchParams,
   useRouter
 } from "expo-router";
+import { useEffect } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
@@ -32,8 +34,16 @@ export default () => {
   const params = useLocalSearchParams();
   const insets = useSafeAreaInsets();
 
+  const { Subscribe } = useCentralMessageStore()
+
   // Get the currently active room from the route parameters
   const activeRoomId = params.rooms as string;
+
+  useEffect(() => {
+    rooms.forEach(room => {
+      Subscribe(room.id)
+    })
+  }, [rooms])
 
   return (
     <View style={[styles.container, { paddingTop: insets.top + 20 }]}>
