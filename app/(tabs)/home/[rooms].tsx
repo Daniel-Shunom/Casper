@@ -1,6 +1,7 @@
 import { RoomInfo, UserName } from "@/api/types/types";
 import MemberCard from "@/components/MemberCard";
 import RoomCard from "@/components/RoomCard";
+import { useCentralRoomStore } from "@/ctx/stores/rooms/roomStore";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useRef, useState } from "react";
 import { Alert, FlatList, PanResponder, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -35,6 +36,8 @@ const mockMembers = [
 
 export default function RoomDetailsPage() {
   const { rooms } = useLocalSearchParams();
+  const metadata = useCentralRoomStore()
+    .getGauranteedRoomMetadata(rooms as string)
 
   const [roomData, setRoomData] = useState<RoomInfo | null>(null);
   const [isJoined, setIsJoined] = useState<boolean>(false);
@@ -154,8 +157,7 @@ export default function RoomDetailsPage() {
         <View style={styles.header}>
           <View style={styles.headerContent}>
             <View style={styles.headerText}>
-              <Text style={styles.headerTitle}>Room Details</Text>
-              <Text style={styles.roomId}>ID: {rooms}</Text>
+              <Text style={styles.headerTitle}>{metadata.name}</Text>
             </View>
             {showJoinSessionButton && (
               <TouchableOpacity
@@ -178,13 +180,11 @@ export default function RoomDetailsPage() {
         {/* Additional room information */}
         <View style={styles.additionalInfo}>
           <Text style={styles.sectionTitle}>About this room</Text>
-          <Text style={styles.infoText}>
-            blah blah blah {roomData.roomdesc}
-          </Text>
+          <Text style={styles.infoText}>{metadata.description}</Text>
 
           <View style={styles.infoRow}>
             <Text style={styles.infoLabel}>Owner:</Text>
-            <Text style={styles.infoValue}>Daniel SJ {roomData.roomowner}</Text>
+            <Text style={styles.infoValue}>{metadata.owner}</Text>
           </View>
         </View>
       </View>

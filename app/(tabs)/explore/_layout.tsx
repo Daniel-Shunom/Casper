@@ -1,6 +1,9 @@
 import { Stack } from "expo-router";
+import { useState } from "react";
 
 export default () => {
+  const [input, setInput] = useState<string>("")
+
   return (
     <Stack screenOptions={{
       title: "Explore",
@@ -10,6 +13,8 @@ export default () => {
       headerSearchBarOptions: {
         placeholder: "Explore Casper",
         hideWhenScrolling: false,
+        onChangeText: (_text) => {},
+        onSearchButtonPress: (_opt) => {}
       }
     }}/>
 
