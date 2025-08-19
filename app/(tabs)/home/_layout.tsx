@@ -1,4 +1,5 @@
 import { useCentralMessageStore } from "@/ctx/stores/messages/messageStore";
+import { useCentralRoomStore } from "@/ctx/stores/rooms/roomStore";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import {
   Slot,
@@ -9,41 +10,22 @@ import { useEffect } from "react";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-// Example dynamic data
-const rooms = [
-  { id: "1", name: "Room 1", icon: "home" },
-  { id: "2", name: "Room 2", icon: "user" },
-  { id: "3", name: "Room 3", icon: "user" },
-  { id: "4", name: "Room 4", icon: "user" },
-  { id: "5", name: "Room 5", icon: "user" },
-  { id: "6", name: "Room 6", icon: "cog" },
-  { id: "7", name: "Room 7", icon: "star" },
-  { id: "8", name: "Room 8", icon: "heart" },
-  { id: "9", name: "Room 9", icon: "bell" },
-  { id: "10", name: "Room 10", icon: "envelope" },
-  { id: "11", name: "Room 11", icon: "music" },
-  { id: "12", name: "Room 12", icon: "camera" },
-  { id: "13", name: "Room 13", icon: "gamepad" },
-  { id: "14", name: "Room 14", icon: "book" },
-  { id: "15", name: "Room 15", icon: "coffee" },
-  // Add more rooms as needed
-] as const;
-
 export default () => {
   const router = useRouter();
   const params = useLocalSearchParams();
   const insets = useSafeAreaInsets();
 
+  const { roomsmetadata } = useCentralRoomStore()
   const { Subscribe } = useCentralMessageStore()
 
   // Get the currently active room from the route parameters
   const activeRoomId = params.rooms as string;
 
   useEffect(() => {
-    rooms.forEach(room => {
+    roomsmetadata.forEach(room => {
       Subscribe(room.id)
     })
-  }, [rooms])
+  }, [roomsmetadata])
 
   return (
     <View style={[styles.container, { paddingTop: insets.top + 20 }]}>
@@ -53,7 +35,7 @@ export default () => {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={true}
         >
-          {rooms.map((room) => (
+          {roomsmetadata.map((room) => (
             <TouchableOpacity
               key={room.id}
               style={[

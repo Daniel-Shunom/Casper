@@ -22,7 +22,7 @@ export default function ChatIndex() {
   return (
     <View style={styles.container}>
       <SafeAreaView />
-      <HeaderNavigation title="Hallo"/>
+      <HeaderNavigation/>
       <StatusBar barStyle="light-content" backgroundColor="#2c2f33" translucent={false} />
       <Text style={{backgroundColor: "#fff"}}>{chat}</Text>
       <MessagesLayout />
