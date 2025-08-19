@@ -6,24 +6,31 @@ import {
 } from "react-native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
+import { useRoomSession } from "@/ctx/roomctx/roomctx";
+import { useCentralRoomStore } from "@/ctx/stores/rooms/roomStore";
 
 interface HeaderNavigationProps {
-  title: string,
   onBack?: () => void
   child?: React.JSX.Element
 }
 
 export default function HeaderNavigation({
-  title, 
   onBack,
   child,
 }: HeaderNavigationProps) {
   const navigator = useNavigation()
-  
+  const { roomid } = useRoomSession()
+  const roometadata = (() => {
+    const option = useCentralRoomStore().getRoomMetadata(roomid)
+    return 'Some' in option
+    ? option.Some
+    : { id: "random", name: "Hallo", icon: "book"} 
+  })()
+
   function navigate() {
     onBack ? onBack() : navigator.goBack()
   }
-  
+
   return(
     <View style={styles.main}>
       <TouchableOpacity style={styles.backButton} onPress={navigate} activeOpacity={0.7}>
@@ -31,7 +38,7 @@ export default function HeaderNavigation({
       </TouchableOpacity>
       
       <View style={styles.titleContainer}>
-        <Text style={styles.title} numberOfLines={1}>{title}</Text>
+        <Text style={styles.title} numberOfLines={1}>{roometadata.name}</Text>
       </View>
       
       <View style={styles.child}>
