@@ -2,7 +2,44 @@
 import * as zus from 'zustand'
 import { Message } from '@/api/types/types'
 import { joinRoom } from '@/api/api'
-import { BounceInLeft } from 'react-native-reanimated'
+
+interface CentralMessageState {
+  KVStore: Map<string, ReturnType<typeof createMessageStore>>
+  getRoomHandler: (roomid: string) => Option<ReturnType<typeof createMessageStore>>
+  Subscribe: (roomid: string) => void
+  unSubscribe: (roomid: string) => void
+}
+
+export const useCentralMessageStore = zus.create<CentralMessageState>((set, get) => ({
+  KVStore: new Map(),
+
+  getRoomHandler: (roomid) => {
+    const handler = get()
+      .KVStore
+      .get(roomid)
+
+    return handler == undefined 
+      ? { None: null }
+      : { Some: handler }
+  },
+
+  Subscribe: (roomid) => {
+    set(state => {
+      const newMap = new Map(state.KVStore)
+      newMap.set(roomid, createMessageStore())
+      return { KVStore: newMap }
+    })
+  },
+
+  unSubscribe: (roomid) => {
+    set(state => {
+      const newMap = new Map(state.KVStore)
+      newMap.delete(roomid)
+      return { KVStore: newMap }
+    })
+  },
+
+}))
 
 export type MsgSuccess = 'success'
 export type MsgError =
@@ -26,8 +63,7 @@ interface MessageState {
   new_connection: (userid: string, roomid: string) => void
   send_message: (msg: string) => Result<MsgSuccess, MsgError>
 }
-
-export const useMessageStore = zus.create<MessageState>((set, get) => ({
+export const createMessageStore = () => zus.create<MessageState>((set, get) => ({
   loading: false,
 
   authenticated: false,
