@@ -5,7 +5,7 @@ import {
 } from "@react-navigation/native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useFocusEffect } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import "react-native-reanimated";
@@ -13,7 +13,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { MockRoomMetadata } from "@/constants/mock/MockRoomMetadata";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { SessionProvider } from "@/ctx/appctx/appctx";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useCentralRoomStore } from "@/ctx/stores/rooms/roomStore";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
@@ -26,9 +26,11 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
-  useEffect(() => {
-    setRoomsMetadata(MockRoomMetadata)
-  }, [MockRoomMetadata])
+  useFocusEffect(
+    useCallback(() => {
+      setRoomsMetadata(MockRoomMetadata)
+    }, [])
+  )
 
   if (!loaded) {
     return null;
