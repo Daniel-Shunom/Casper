@@ -1,3 +1,9 @@
+/// Note to self -> 
+/// this solely exists for the sole purpose of providing
+/// context that may come from dynamic routes, and other 
+/// sources of truths, to consumers of this context.
+
+
 import React, {
   createContext,
   PropsWithChildren,
