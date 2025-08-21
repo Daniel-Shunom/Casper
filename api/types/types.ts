@@ -106,6 +106,19 @@ export type Message = {
   content: string;
   authenticated: boolean;
 }
+
+// ==========EVENTS========== //
+export type CasperEvent = {
+  title: string,
+  description: string,
+  category: CasperEventCategory
+}
+
+export type CasperEventCategory = 
+  | 'Social'
+  | 'Game'
+  | 'Movie'
+  | 'Custom'
 // ==========LOGIN========== //
 
 export type Auth = {
