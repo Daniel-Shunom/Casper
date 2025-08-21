@@ -1,26 +1,30 @@
-import EventCard from "@/components/EventCard";
-import GenreCard from "@/components/GenreCard";
 import TopicCard from "@/components/TopicCard";
+import EventsTray from "@/components/ui/explore/Events";
+import TopicsTray from "@/components/ui/explore/TopicsTray";
 import React from "react";
 import {
-  View,
+  ScrollView,
   StyleSheet,
   SafeAreaView
 } from "react-native";
 
+
 export default function DemoScreen() {
   return (
-    <View style={styles.container}>
+    <ScrollView 
+      contentInsetAdjustmentBehavior="automatic"
+      contentContainerStyle={styles.container}
+    >
       <SafeAreaView />
-      <GenreCard title="demo-genre" />
-      <TopicCard topic="foofighters" />
-      <EventCard event="demp-event" />
-    </View>
+      <TopicsTray />
+      <EventsTray />
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  }
+    gap: 32,
+  },
+
 })
